@@ -8,7 +8,7 @@
 
 #import <AFNetworking/AFNetworking.h>
 
-@interface HTTPClient : AFHTTPRequestOperationManager
+@interface HTTPClient : AFHTTPSessionManager
 
 -(instancetype)initWithBaseURL;
 

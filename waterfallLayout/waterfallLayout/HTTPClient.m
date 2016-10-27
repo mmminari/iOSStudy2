@@ -12,25 +12,27 @@
 
 -(instancetype)initWithBaseURL
 {
-    if(self = [super initWithBaseURL:[NSURL URLWithString:@"https://pointapibeta.smtown.com"]]) //
+    if(self = [super initWithBaseURL:[NSURL URLWithString:@""]])
     {
-     //   LogYellow(@"return self");
+        
     }
     
     return self;
     
 }
 
+
+
 -(void)GETWithUrlString:(NSString *)urlString parameters:(id)parameters
                 success:(void (^)(id results))success
                 failure:(void (^)(NSError *error))failure
 {
-    [self GET:urlString parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self GET:urlString parameters:parameters progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         if(success)
         {
             success(responseObject);
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
         if(failure)
         {
             failure(error);
@@ -42,12 +44,12 @@
                  success:(void (^)(id results))success
                  failure:(void (^)(NSError *error))failure
 {
-    [self POST:urlString parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionTask *task, id responseObject) {
         if(success)
         {
             success(responseObject);
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
         if(failure)
         {
             failure(error);
@@ -61,20 +63,19 @@
                    success:(void (^)(id responseObject))success
                    failure:(void (^)(NSError *error))failure
 {
-    [self POST:URLString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData)
-    {
+    
+    
+    [self POST:URLString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:data name:@"iamge" fileName:@"image.jpg" mimeType:@"image/jpg"];
-
-    }
-       success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-    {
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if(success)
         {
             success(responseObject);
         }
-    }
-       failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-    {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if(failure)
         {
             failure(error);
@@ -86,34 +87,38 @@
                 success:(void (^)(id results))success
                 failure:(void (^)(NSError *error))failure
 {
-    [self PUT:urlString parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    
+    [self PUT:urlString parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if(success)
         {
             success(responseObject);
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if(failure)
         {
             failure(error);
         }
     }];
+    
 }
 
 -(void)PATCHWithUrlString:(NSString *)urlString parameters:(id)parameters
                   success:(void (^)(id results))success
                   failure:(void (^)(NSError *error))failure
 {
-    [self PATCH:urlString parameters:parameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    
+    [self PATCH:urlString parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if(success)
         {
             success(responseObject);
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if(failure)
         {
             failure(error);
         }
     }];
+    
 }
 
 

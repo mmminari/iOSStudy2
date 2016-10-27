@@ -21,10 +21,6 @@ NSString *const kMHOriginImageHeight = @"height";
 
 @implementation MHOriginImage
 
-@synthesize url = _url;
-@synthesize width = _width;
-@synthesize height = _height;
-
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict
 {

@@ -18,9 +18,10 @@
 
 @interface WaterfallLayoutViewController () < CHTCollectionViewDelegateWaterfallLayout>
 
-@property (strong, nonatomic) NSMutableArray *ImageList;
 @property (strong, nonatomic) IBOutlet UICollectionView *cvMain;
 @property (strong, nonatomic) IBOutlet CHTCollectionViewWaterfallLayout *watarfallLayout;
+
+@property (strong, nonatomic) NSMutableArray *ImageList;
 @property (strong, nonatomic) HTTPClient *httpClient;
 @property (strong, nonatomic) NSMutableArray *cellHeights;
 
@@ -46,6 +47,7 @@ static NSString * const reuseIdentifier = @"ImageCell";
     [self request];
 }
 
+#pragma mark - Request
 - (void)request
 {
     [self.httpClient POSTWithUrlString:@"https://y3zhm4ntme.execute-api.ap-northeast-1.amazonaws.com/prod2" parameters:nil success:^(id results) {
@@ -73,11 +75,11 @@ static NSString * const reuseIdentifier = @"ImageCell";
         CGFloat height = resultList.thumbnailImage.height;
         CGFloat width = resultList.thumbnailImage.width;
         
-        CGFloat maxWidth = ([UIScreen mainScreen].bounds.size.width - 30.0f)/2;
+        CGFloat maxWidth = ([UIScreen mainScreen].bounds.size.width - 10.0f)/2;
         
-        height = height * width / maxWidth;
+        CGFloat newHeight = height * maxWidth / width;
         
-        [self.cellHeights addObject:@(height)];
+        [self.cellHeights addObject:@(newHeight)];
         
     }
     
