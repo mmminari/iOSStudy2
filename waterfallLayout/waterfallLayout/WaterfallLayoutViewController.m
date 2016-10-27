@@ -34,7 +34,6 @@ static NSString * const reuseIdentifier = @"ImageCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     
     self.httpClient = [[HTTPClient alloc]init];
     self.ImageList = [NSMutableArray array];
